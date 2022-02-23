@@ -130,6 +130,7 @@ export interface Props {
   size?: Size;
   resizeGrid?: Grid;
   bounds?: string;
+  parent?: string;
   onMouseDown?: (e: MouseEvent) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onResizeStart?: RndResizeStartCallback;
@@ -257,7 +258,8 @@ export class Rnd extends React.PureComponent<Props, State> {
   }
 
   getParent() {
-    return this.resizable && (this.resizable as any).parentNode;
+    const parent = document.querySelector(this.props.parent)
+    return parent ? parent : this.resizable && (this.resizable as any).parentNode;
   }
 
   getParentSize(): { width: number; height: number } {
